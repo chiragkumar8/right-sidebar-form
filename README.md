@@ -4,6 +4,11 @@ An interactive and responsive right sidebar with a user form, built using HTML, 
 
 ---
 
+## Demo  
+![Sidebar Form Preview](screenshot.gif "Responsive Sidebar Form UI")
+
+---
+
 ## 💡 Key Features
 - Responsive design for all screen sizes
 - Slide-in sidebar animation with overlay
