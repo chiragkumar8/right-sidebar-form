@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
+
+        <title>Right Sidebar</title>
+        <style>
+            .sidebar-right-icon {
+                position: fixed;
+                top: 150px;
+                right: 0;
+                background-color: #007bff;
+                color: white;
+                padding: 12px;
+                cursor: pointer;
+                font-size: 24px;
+                z-index: 2;
+                transition: background-color 0.2s;
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+            .sidebar-right-icon:hover {
+                background-color: #0056b3;
+            }
+            .sidebar-right {
+                position: fixed;
+                top: 0;
+                right: -750px; /* Hidden by default */
+                width: 750px;
+                height: 100%;
+                background-color: #ffffff;
+                box-shadow: 13px 10px 8px 0px rgba(0, 0, 0, 0.2);
+                transition: right 0.3s ease-in-out;
+                z-index: 1030;
+                overflow-y: auto;
+            }
+            .sidebar-right.open {
+                right: 0; /* Slide in */
+            }
+            .sidebar-right h2 {
+                margin: 0 0 20px;
+                font-size: 24px;
+                color: #333;
+            }
+            .sidebar-right-close-btn {
+                background: none;
+                border: none;
+                font-size: 35px;
+                cursor: pointer;
+                position: absolute;
+                top: 7px;
+                right: 15px;
+                color: #333;
+            }
+            /* Overlay styles */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+                z-index: 1030;
+            }
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /*X-Small devices (portrait phones, less than 576px)*/
+            @media (max-width: 575.98px) { 
+                .sidebar-right{
+                    width: 100%;
+                }
+            }
+
+            /*Small devices (landscape phones, less than 768px)*/
+            @media (max-width: 767.98px) {
+                .sidebar-right{
+                    width: 100%;
+                }
+            }
+
+           
+        </style>
+    </head>
+    <body>
+        <div class="sidebar-right-icon" onclick="togglesidebar()">
+            <i class="fa-solid fa-address-card"></i>
+        </div>
+        <div class="overlay" id="overlay"></div>
+        <div class="sidebar-right" id="sidebar-right">
+            <div style="padding: 20px;">
+                <button class="sidebar-right-close-btn" onclick="togglesidebar()"><i class="fa-regular fa-circle-xmark"></i></button>
+
+                <h2 class="card-title"><i class="fa-solid fa-address-card"></i> Enter Your Details</h2>
+
+                <div class="row">
+                    <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="first_name">First Name</label>
+                                                <input type="text" class="form-control" id="first_name" placeholder="First Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="last_name">Last Name</label>
+                                                <input type="text" class="form-control" id="last_name" placeholder="Last Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="email">Email Id</label>
+                                                <input type="email" class="form-control" id="email" placeholder="Email Id" />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="mobile">Mobile</label>
+                                                <input type="tel" class="form-control" id="mobile" placeholder="Mobile" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="gander">Gander</label>
+                                                <select class="form-select" id="gander" name="gander">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group mb-3">
+                                                <label class="form-label" for="status">Status</label>
+                                                <select class="form-select" id="status" name="status">
+                                                    <option value="Active">Active</option>
+                                                    <option value="Deactive">Deactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary me-2" id="search-filter-btn">Submit</button>
+                                    <button type="button" class="btn btn-light" onclick="togglesidebar()">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function togglesidebar() {
+                const sidebar = document.getElementById("sidebar-right");
+                const overlay = document.getElementById("overlay");
+                const isOpen = sidebar.classList.toggle("open");
+                overlay.classList.toggle("active", isOpen);
+            }
+        </script>
+    </body>
+</html>
